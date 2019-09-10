@@ -1,0 +1,17 @@
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\spieleliste-backend.deps.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\spieleliste-backend.runtimeconfig.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\spieleliste-backend.runtimeconfig.dev.json
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\spieleliste-backend.dll
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.csprojAssemblyReference.cache
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.RazorAssemblyInfo.cache
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.RazorAssemblyInfo.cs
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.AssemblyInfoInputs.cache
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.AssemblyInfo.cs
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.RazorTargetAssemblyInfo.cache
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\bin\Debug\netcoreapp2.2\spieleliste-backend.pdb
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.dll
+C:\Users\Lenovo G50-45\Desktop\reference\S\Spieleliste\spieleliste-backend\spieleliste-backend\obj\Debug\netcoreapp2.2\spieleliste-backend.pdb

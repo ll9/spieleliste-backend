@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Models
 {
-    public class Spieleliste
+    public class ListenEintrag
     {
-        public ICollection<int> SpielIds { get; set; }
+        public int SpielId { get; set; }
     }
 }
