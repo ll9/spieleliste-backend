@@ -12,11 +12,11 @@ namespace spieleliste_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListenEintragController : ControllerBase
+    public class ListenEintraegeController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public ListenEintragController(ApplicationDbContext context)
+        public ListenEintraegeController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,15 +27,14 @@ namespace spieleliste_backend.Controllers
             return await _context.ListenEintraege.ToListAsync();
         }
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> AddToList(int id)
+        [HttpPost]
+        public async Task<IActionResult> AddToList([FromBody] ListenEintrag entry)
         {
-            if (_context.ListenEintraege.Any(e => e.SpielId == id))
+            if (_context.ListenEintraege.Any(e => e.SpielId == entry.SpielId))
             {
                 return StatusCode((int)HttpStatusCode.Conflict, "Item already on list");
             }
 
-            var entry = new ListenEintrag(id);
             _context.ListenEintraege.Add(entry);
             await _context.SaveChangesAsync();
 

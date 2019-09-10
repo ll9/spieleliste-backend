@@ -8,8 +8,8 @@ using spieleliste_backend.Data;
 namespace spieleliste_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190910204419_Init")]
-    partial class Init
+    [Migration("20190910210535_Reinit")]
+    partial class Reinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,10 +19,14 @@ namespace spieleliste_backend.Migrations
 
             modelBuilder.Entity("spieleliste_backend.Models.ListenEintrag", b =>
                 {
-                    b.Property<int>("SpielId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("SpielId");
+                    b.Property<int>("SpielId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpielId");
 
                     b.ToTable("ListenEintraege");
                 });

@@ -19,6 +19,7 @@ namespace spieleliste_backend.Models
             SpielId = spielId;
         }
 
-        public int SpielId { get; private set; }
+        public int Id { get; set; }
+        public int SpielId { get; set; }
     }
 }

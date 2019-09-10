@@ -13,7 +13,8 @@ namespace spieleliste_backend.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ListenEintrag> builder)
         {
-            builder.HasKey(e => e.SpielId);
+            builder.HasKey(e => e.Id);
+            builder.HasIndex(e => e.SpielId);
         }
     }
 }
