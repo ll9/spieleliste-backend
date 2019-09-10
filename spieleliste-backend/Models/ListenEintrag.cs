@@ -8,6 +8,17 @@ namespace spieleliste_backend.Models
 {
     public class ListenEintrag
     {
-        public int SpielId { get; set; }
+        [Obsolete("Ef Core only")]
+        public ListenEintrag()
+        {
+
+        }
+
+        public ListenEintrag(int spielId)
+        {
+            SpielId = spielId;
+        }
+
+        public int SpielId { get; private set; }
     }
 }
