@@ -44,7 +44,7 @@ namespace spieleliste_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromList(int id)
         {
-            var entry = await _context.ListenEintraege.FindAsync(id);
+            var entry = await _context.ListenEintraege.SingleOrDefaultAsync(e => e.SpielId == id);
 
             if (entry == null)
             {

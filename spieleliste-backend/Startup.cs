@@ -40,6 +40,8 @@ namespace spieleliste_backend
                 app.UseHsts();
             }
 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader());
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }
