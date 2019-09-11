@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using spieleliste_backend.Data;
 using spieleliste_backend.Models;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data.SqlClient;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -14,45 +12,57 @@ namespace spieleliste_backend.Controllers
     [ApiController]
     public class ListenEintraegeController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _uow;
 
-        public ListenEintraegeController(ApplicationDbContext context)
+        public ListenEintraegeController(IUnitOfWork uow)
         {
-            _context = context;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ListenEintrag>>> GetList()
-        {
-            return await _context.ListenEintraege.ToListAsync();
+            _uow = uow;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddToList([FromBody] ListenEintrag entry)
         {
-            if (_context.ListenEintraege.Any(e => e.SpielId == entry.SpielId))
+            await _uow.ListenEintraege.Add(entry);
+
+            try
             {
-                return StatusCode((int)HttpStatusCode.Conflict, "Item already on list");
+                await _uow.Complete();
+            }
+            catch (SqlException exception)
+            {
+                if (exception.Number == 2601 || exception.Number == 2627)
+                {
+                    return StatusCode((int)HttpStatusCode.Conflict, "Item already on list");
+                }
+                else
+                {
+                    return BadRequest(exception.Message);
+                }
             }
 
-            _context.ListenEintraege.Add(entry);
-            await _context.SaveChangesAsync();
-
             return Ok(entry);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ListenEintrag>>> GetList()
+        {
+            var entries = await _uow.ListenEintraege.List();
+
+            return Ok(entries);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromList(int id)
         {
-            var entry = await _context.ListenEintraege.SingleOrDefaultAsync(e => e.SpielId == id);
+            var entry = await _uow.ListenEintraege.Get(id);
 
             if (entry == null)
             {
                 return NotFound();
             }
 
-            _context.ListenEintraege.Remove(entry);
-            _context.SaveChanges();
+            await _uow.ListenEintraege.Remove(entry);
+            await _uow.Complete();
 
             return NoContent();
         }

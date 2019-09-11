@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using spieleliste_backend.Models;
+using spieleliste_backend.Repositories;
 
 namespace spieleliste_backend.Data
 {
     public interface IUnitOfWork
     {
-        DbSet<ListenEintrag> ListenEintraege { get; set; }
+        IListenEintragRepository ListenEintraege { get; set; }
 
         Task Complete();
     }
