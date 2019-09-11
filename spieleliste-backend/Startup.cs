@@ -21,6 +21,7 @@ namespace spieleliste_backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(conf => conf.UseSqlite("Data Source = db.sqlite"));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
