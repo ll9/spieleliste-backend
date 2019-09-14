@@ -41,7 +41,7 @@ namespace spieleliste_backend.Controllers
                 return BadRequest(e);
             }
 
-            return CreatedAtAction(nameof(Get), new { Id = user.Id });
+            return CreatedAtAction(nameof(Get), new { Id = user.Id }, user);
         }
 
         [HttpGet]
@@ -67,6 +67,9 @@ namespace spieleliste_backend.Controllers
             {
                 return NotFound($"User with id '{id}' not found");
             }
+
+            await _unitOfWork.Users.Remove(user);
+            await _unitOfWork.Complete();
 
             return NoContent();
         }
