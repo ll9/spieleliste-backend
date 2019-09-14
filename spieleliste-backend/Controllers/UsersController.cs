@@ -29,10 +29,12 @@ namespace spieleliste_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> List()
         {
-            return null;
+            var users = await _unitOfWork.Users.List();
+
+            return Ok(users);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Remove(int id)
+        public async Task<ActionResult> Remove(int id)
         {
             return null;
         }

@@ -30,7 +30,7 @@ namespace spielelistebackendtests.Controllers
         {
             var res = await sut.List();
 
-            Assert.AreEqual(typeof(OkObjectResult), res.GetType());
+            Assert.AreEqual(typeof(OkObjectResult), res.Result.GetType());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace spielelistebackendtests.Controllers
             var user = new User("name");
             var res = await sut.Create(user);
 
-            Assert.AreEqual(typeof(CreatedAtActionResult), res.GetType());
+            Assert.AreEqual(typeof(CreatedAtActionResult), res.Result.GetType());
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(new User("_"));
 
-            Assert.AreEqual(typeof(ConflictResult), res.GetType());
+            Assert.AreEqual(typeof(ConflictResult), res.Result.GetType());
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(new User(Name));
 
-            Assert.AreEqual(typeof(ConflictResult), res.GetType());
+            Assert.AreEqual(typeof(ConflictResult), res.Result.GetType());
         }
 
         [Test]
