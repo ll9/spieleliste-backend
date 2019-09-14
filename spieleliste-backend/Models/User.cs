@@ -8,7 +8,7 @@ namespace spieleliste_backend.Models
 {
     public class User
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<UserEintrag> UserEintraege { get; set; }

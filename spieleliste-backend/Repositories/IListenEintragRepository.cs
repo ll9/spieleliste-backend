@@ -8,7 +8,7 @@ namespace spieleliste_backend.Repositories
     {
         Task<ListenEintrag> Add(ListenEintrag entry);
         Task<ListenEintrag> Get(int id);
-        Task<List<ListenEintrag>> List();
+        Task<IEnumerable<ListenEintrag>> List();
         Task Remove(ListenEintrag entry);
     }
 }

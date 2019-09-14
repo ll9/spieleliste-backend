@@ -12,6 +12,8 @@ namespace spieleliste_backend.Data
         }
 
         public DbSet<ListenEintrag> ListenEintraege { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserEintrag> UserEintraege { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

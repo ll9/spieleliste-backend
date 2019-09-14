@@ -8,11 +8,11 @@ namespace spieleliste_backend.Models
 {
     public class UserEintrag
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
-        public Guid ListenEintragId { get; set; }
+        public int ListenEintragId { get; set; }
         public ListenEintrag ListenEintrag { get; set; }
     }
 }

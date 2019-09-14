@@ -8,6 +8,7 @@ namespace spieleliste_backend.Data
     public interface IUnitOfWork
     {
         IListenEintragRepository ListenEintraege { get; set; }
+        IUserRepository Users { get; set; }
 
         Task Complete();
     }
