@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using spieleliste_backend.Data;
 using spieleliste_backend.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace spieleliste_backend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> List()
+        public const byte MaxUsers = 4;
+        private readonly IUnitOfWork _unitOfWork;
+        public UsersController(IUnitOfWork unitOfWork)
         {
-            return null;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -24,8 +26,13 @@ namespace spieleliste_backend.Controllers
             return null;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> List()
+        {
+            return null;
+        }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Remove(Guid id)
+        public async Task<IActionResult> Remove(int id)
         {
             return null;
         }

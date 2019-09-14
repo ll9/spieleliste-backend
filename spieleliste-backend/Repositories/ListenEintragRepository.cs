@@ -32,9 +32,9 @@ namespace spieleliste_backend.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<List<ListenEintrag>> List()
+        public async Task<IEnumerable<ListenEintrag>> List()
         {
-            return _context.ListenEintraege.ToListAsync();
+            return await _context.ListenEintraege.ToListAsync();
         }
     }
 }
