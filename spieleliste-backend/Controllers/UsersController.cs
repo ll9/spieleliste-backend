@@ -19,13 +19,13 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Create()
+        public async Task<ActionResult<User>> Create(User user)
         {
             return null;
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Remove()
+        public async Task<IActionResult> Remove(Guid id)
         {
             return null;
         }
