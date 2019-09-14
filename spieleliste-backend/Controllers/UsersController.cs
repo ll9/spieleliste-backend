@@ -23,7 +23,25 @@ namespace spieleliste_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> Create(User user)
         {
-            return null;
+            if ((await _unitOfWork.Users.List()).Count() >= MaxUsers)
+            {
+                return Conflict($"Maximum amount of {MaxUsers} Users Reached");
+            }
+
+
+            await _unitOfWork.Users.Add(user);
+
+            try
+            {
+                await _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                // TODO: Handle duplicate name exception properly
+                return BadRequest(e);
+            }
+
+            return CreatedAtAction(nameof(Get), new { Id = user.Id });
         }
 
         [HttpGet]
@@ -33,10 +51,24 @@ namespace spieleliste_backend.Controllers
 
             return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {
-            return null;
+            var user = await _unitOfWork.Users.Get(id);
+
+            if (user == null)
+            {
+                return NotFound($"User with id '{id}' not found");
+            }
+
+            return NoContent();
         }
     }
 }

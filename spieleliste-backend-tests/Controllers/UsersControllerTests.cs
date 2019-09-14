@@ -50,19 +50,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(new User("_"));
 
-            Assert.AreEqual(typeof(ConflictResult), res.Result.GetType());
-        }
-
-        [Test]
-        public async Task Create_DuplicateUserName_ReturnsConflictResult()
-        {
-            const string Name = "name";
-            repo.Setup(r => r.List()).Returns(
-                Task.FromResult(new List<User> { new User(Name) }.AsEnumerable()));
-
-            var res = await sut.Create(new User(Name));
-
-            Assert.AreEqual(typeof(ConflictResult), res.Result.GetType());
+            Assert.AreEqual(typeof(ConflictObjectResult), res.Result.GetType());
         }
 
         [Test]
@@ -82,7 +70,7 @@ namespace spielelistebackendtests.Controllers
             repo.Setup(r => r.Get(1)).Returns(Task.FromResult<User>(null));
 
             var res = await sut.Remove(1);
-            Assert.AreEqual(typeof(NotFoundResult), res.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
     }
 }
