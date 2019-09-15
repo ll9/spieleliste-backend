@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Models
 {
-    public class ListenEintrag
+    public class ListEntry
     {
         [Obsolete("Ef Core only")]
-        public ListenEintrag()
+        public ListEntry()
         {
 
         }
 
-        public ListenEintrag(int spielId)
+        public ListEntry(int spielId)
         {
             SpielId = spielId;
         }

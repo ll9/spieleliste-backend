@@ -16,6 +16,6 @@ namespace spieleliste_backend.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<UserEintrag> UserEintraege { get; set; }
+        public ICollection<UserEntry> UserEntries { get; set; }
     }
 }

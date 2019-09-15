@@ -6,9 +6,9 @@ namespace spieleliste_backend.Repositories
 {
     public interface IListenEintragRepository
     {
-        Task<ListenEintrag> Add(ListenEintrag entry);
-        Task<ListenEintrag> Get(int id);
-        Task<IEnumerable<ListenEintrag>> List();
-        Task Remove(ListenEintrag entry);
+        Task<ListEntry> Add(ListEntry entry);
+        Task<ListEntry> Get(int id);
+        Task<IEnumerable<ListEntry>> List();
+        Task Remove(ListEntry entry);
     }
 }

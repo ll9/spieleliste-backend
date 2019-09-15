@@ -14,7 +14,7 @@ namespace spieleliste_backend.Data.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
-                .HasMany(e => e.UserEintraege)
+                .HasMany(e => e.UserEntries)
                 .WithOne(e => e.User);
 
             builder

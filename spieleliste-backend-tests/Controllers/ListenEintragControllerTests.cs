@@ -15,7 +15,7 @@ namespace spielelistebackendtests.Controllers
 {
     public class ListenEintragControllerTests
     {
-        private ListenEintraegeController sut;
+        private ListEntryController sut;
         private Mock<IListenEintragRepository> repo;
 
         [SetUp]
@@ -25,7 +25,7 @@ namespace spielelistebackendtests.Controllers
             repo = new Mock<IListenEintragRepository>();
 
             uow.Setup(uow => uow.ListenEintraege).Returns(repo.Object);
-            sut = new ListenEintraegeController(uow.Object);
+            sut = new ListEntryController(uow.Object);
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace spielelistebackendtests.Controllers
         [Test]
         public async Task RemoveFromList_EntryDoesNotExist_ReturnsNotFound()
         {
-            repo.Setup(r => r.Get(1)).Returns(Task.FromResult<ListenEintrag>(null));
+            repo.Setup(r => r.Get(1)).Returns(Task.FromResult<ListEntry>(null));
             var res = await sut.RemoveFromList(1);
 
             Assert.AreEqual(typeof(NotFoundResult), res.GetType());
@@ -48,8 +48,8 @@ namespace spielelistebackendtests.Controllers
         [Test]
         public async Task RemoveFromList_EntryExists_ReturnsNotFound()
         {
-            repo.Setup(r => r.Get(1)).Returns(Task.FromResult(new ListenEintrag(1)));
-            repo.Setup(r => r.Remove(new ListenEintrag(1))).Returns(Task.CompletedTask);
+            repo.Setup(r => r.Get(1)).Returns(Task.FromResult(new ListEntry(1)));
+            repo.Setup(r => r.Remove(new ListEntry(1))).Returns(Task.CompletedTask);
 
 
             var res = await sut.RemoveFromList(1);

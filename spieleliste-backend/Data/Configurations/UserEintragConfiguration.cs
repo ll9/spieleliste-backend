@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Data.Configurations
 {
-    public class UserEintragConfiguration : IEntityTypeConfiguration<UserEintrag>
+    public class UserEintragConfiguration : IEntityTypeConfiguration<UserEntry>
     {
-        public void Configure(EntityTypeBuilder<UserEintrag> builder)
+        public void Configure(EntityTypeBuilder<UserEntry> builder)
         {
             builder
                 .HasOne(e => e.User)
-                .WithMany(e => e.UserEintraege);
+                .WithMany(e => e.UserEntries);
 
             builder
-                .HasOne(e => e.ListenEintrag)
+                .HasOne(e => e.ListEntry)
                 .WithMany();
         }
     }

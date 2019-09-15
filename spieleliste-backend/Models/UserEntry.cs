@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Models
 {
-    public class UserEintrag
+    public class UserEntry
     {
         public int Id { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }
         public int ListenEintragId { get; set; }
-        public ListenEintrag ListenEintrag { get; set; }
+        public ListEntry ListEntry { get; set; }
     }
 }

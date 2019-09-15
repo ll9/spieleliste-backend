@@ -15,26 +15,26 @@ namespace spieleliste_backend.Repositories
             _context = context;
         }
 
-        public async Task<ListenEintrag> Add(ListenEintrag entry)
+        public async Task<ListEntry> Add(ListEntry entry)
         {
-            await _context.ListenEintraege.AddAsync(entry);
+            await _context.ListEntries.AddAsync(entry);
             return entry;
         }
 
-        public Task<ListenEintrag> Get(int id)
+        public Task<ListEntry> Get(int id)
         {
-            return _context.ListenEintraege.SingleOrDefaultAsync(e => e.SpielId == id);
+            return _context.ListEntries.SingleOrDefaultAsync(e => e.SpielId == id);
         }
 
-        public Task Remove(ListenEintrag entry)
+        public Task Remove(ListEntry entry)
         {
             _context.Remove(entry);
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<ListenEintrag>> List()
+        public async Task<IEnumerable<ListEntry>> List()
         {
-            return await _context.ListenEintraege.ToListAsync();
+            return await _context.ListEntries.ToListAsync();
         }
     }
 }

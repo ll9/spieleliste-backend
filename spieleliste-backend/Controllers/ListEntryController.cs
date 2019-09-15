@@ -10,17 +10,17 @@ namespace spieleliste_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListenEintraegeController : ControllerBase
+    public class ListEntryController : ControllerBase
     {
         private readonly IUnitOfWork _uow;
 
-        public ListenEintraegeController(IUnitOfWork uow)
+        public ListEntryController(IUnitOfWork uow)
         {
             _uow = uow;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToList([FromBody] ListenEintrag entry)
+        public async Task<IActionResult> AddToList([FromBody] ListEntry entry)
         {
             await _uow.ListenEintraege.Add(entry);
 
@@ -44,7 +44,7 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ListenEintrag>>> GetList()
+        public async Task<ActionResult<IEnumerable<ListEntry>>> GetList()
         {
             var entries = await _uow.ListenEintraege.List();
 
