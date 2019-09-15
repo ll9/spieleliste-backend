@@ -10,11 +10,11 @@ namespace spieleliste_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListEntryController : ControllerBase
+    public class ListEntriesController : ControllerBase
     {
         private readonly IUnitOfWork _uow;
 
-        public ListEntryController(IUnitOfWork uow)
+        public ListEntriesController(IUnitOfWork uow)
         {
             _uow = uow;
         }

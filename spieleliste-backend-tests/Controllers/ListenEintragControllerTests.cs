@@ -15,7 +15,7 @@ namespace spielelistebackendtests.Controllers
 {
     public class ListenEintragControllerTests
     {
-        private ListEntryController sut;
+        private ListEntriesController sut;
         private Mock<IListenEintragRepository> repo;
 
         [SetUp]
@@ -25,7 +25,7 @@ namespace spielelistebackendtests.Controllers
             repo = new Mock<IListenEintragRepository>();
 
             uow.Setup(uow => uow.ListenEintraege).Returns(repo.Object);
-            sut = new ListEntryController(uow.Object);
+            sut = new ListEntriesController(uow.Object);
         }
 
         [Test]
