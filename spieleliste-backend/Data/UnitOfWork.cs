@@ -7,6 +7,7 @@ using spieleliste_backend.Repositories;
 
 namespace spieleliste_backend.Data
 {
+
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
@@ -16,10 +17,12 @@ namespace spieleliste_backend.Data
             _context = context;
             ListenEintraege = new ListenEintragRepository(_context);
             Users = new UserRepository(_context);
+            UserEntries = new UserEntryRepository(_context);
         }
 
         public IListenEintragRepository ListenEintraege { get; set; }
         public IUserRepository Users { get; set; }
+        public IUserEntryRepository UserEntries { get; set; }
 
         public Task Complete()
         {

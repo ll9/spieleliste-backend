@@ -8,6 +8,18 @@ namespace spieleliste_backend.Models
 {
     public class UserEntry
     {
+        [Obsolete("Ef Core only")]
+        public UserEntry()
+        {
+
+        }
+
+        public UserEntry(int userId, int listEntryId)
+        {
+            UserId = userId;
+            ListEntryId = listEntryId;
+        }
+
         public int Id { get; set; }
 
         public int UserId { get; set; }

@@ -53,7 +53,7 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
+        public Task<ActionResult<User>> Get(int id)
         {
             throw new NotImplementedException();
         }

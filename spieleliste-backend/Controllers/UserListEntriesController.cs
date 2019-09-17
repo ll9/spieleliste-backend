@@ -21,14 +21,14 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Create(UserEntry userEntry)
+        public Task<IActionResult> Create(int userId, ListEntry listEntry)
         {
             throw new NotImplementedException();
         }
 
 
         [HttpDelete("{id}")]
-        public Task<IActionResult> Remove(int id)
+        public Task<IActionResult> Remove(int userId, int id)
         {
             throw new NotImplementedException();
         }
