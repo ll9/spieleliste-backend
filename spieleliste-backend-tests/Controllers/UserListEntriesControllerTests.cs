@@ -44,7 +44,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(user.Id, listEntry);
 
-            Assert.Equals(typeof(CreatedAtActionResult), res.GetType());
+            Assert.AreEqual(typeof(OkResult), res.GetType());
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(1, listEntry);
 
-            Assert.Equals(typeof(NotFoundResult), res.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Create(1, listEntry);
 
-            Assert.Equals(typeof(NotFoundResult), res.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Remove(user.Id, userEntry.Id);
 
-            Assert.Equals(typeof(NoContentResult), res.GetType());
+            Assert.AreEqual(typeof(OkResult), res.GetType());
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Remove(It.IsAny<int>(), It.IsAny<int>());
 
-            Assert.Equals(typeof(NotFoundResult), res.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace spielelistebackendtests.Controllers
 
             var res = await sut.Remove(It.IsAny<int>(), It.IsAny<int>());
 
-            Assert.Equals(typeof(NoContentResult), res.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
     }
 }
