@@ -12,7 +12,7 @@ namespace spieleliste_backend.Models
 
         public int UserId { get; set; }
         public User User { get; set; }
-        public int ListenEintragId { get; set; }
+        public int ListEntryId { get; set; }
         public ListEntry ListEntry { get; set; }
     }
 }

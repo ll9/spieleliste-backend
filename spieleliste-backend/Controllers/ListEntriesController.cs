@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/listentries")]
     [ApiController]
     public class ListEntriesController : ControllerBase
     {
