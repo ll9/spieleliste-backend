@@ -8,8 +8,8 @@ using spieleliste_backend.Data;
 namespace spieleliste_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190914202116_Users")]
-    partial class Users
+    [Migration("20190917205459_FromScratch")]
+    partial class FromScratch
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace spieleliste_backend.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("spieleliste_backend.Models.ListenEintrag", b =>
+            modelBuilder.Entity("spieleliste_backend.Models.ListEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -28,7 +28,7 @@ namespace spieleliste_backend.Migrations
 
                     b.HasIndex("SpielId");
 
-                    b.ToTable("ListenEintraege");
+                    b.ToTable("ListEntries");
                 });
 
             modelBuilder.Entity("spieleliste_backend.Models.User", b =>
@@ -46,33 +46,33 @@ namespace spieleliste_backend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("spieleliste_backend.Models.UserEintrag", b =>
+            modelBuilder.Entity("spieleliste_backend.Models.UserEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ListenEintragId");
+                    b.Property<int>("ListEntryId");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListenEintragId");
+                    b.HasIndex("ListEntryId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserEintraege");
+                    b.ToTable("UserEntries");
                 });
 
-            modelBuilder.Entity("spieleliste_backend.Models.UserEintrag", b =>
+            modelBuilder.Entity("spieleliste_backend.Models.UserEntry", b =>
                 {
-                    b.HasOne("spieleliste_backend.Models.ListenEintrag", "ListenEintrag")
+                    b.HasOne("spieleliste_backend.Models.ListEntry", "ListEntry")
                         .WithMany()
-                        .HasForeignKey("ListenEintragId")
+                        .HasForeignKey("ListEntryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("spieleliste_backend.Models.User", "User")
-                        .WithMany("UserEintraege")
+                        .WithMany("UserEntries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

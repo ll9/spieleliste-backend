@@ -21,16 +21,16 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int userId, ListEntry listEntry)
+        public async Task<IActionResult> Create(int userId, [FromBody] ListEntry dto)
         {
             var user = await _uow.Users.Get(userId);
 
             if (user == null)
                 return NotFound("User not found");
 
-            var list = await _uow.ListenEintraege.Get(listEntry.Id);
+            var listEntry = await _uow.ListenEintraege.Get(dto.SpielId);
 
-            if (list == null)
+            if (listEntry == null)
                 return NotFound("Listentry Not found");
 
             var userEntry = new UserEntry(userId, listEntry.Id);
@@ -44,20 +44,25 @@ namespace spieleliste_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int userId, int id)
         {
-            var user = await _uow.Users.Get(userId);
+            throw new NotImplementedException("Fix below code");
 
-            if (user == null)
-                return NotFound("User not found");
+            //var user = await _uow.Users.Get(userId);
+            //var listEntry = await _uow.ListenEintraege.Get(id);
 
-            var userEntry = await _uow.UserEntries.Get(id);
+            //if (user == null)
+            //    return NotFound("User not found");
+            //if (listEntry == null)
+            //    return NotFound("ListEntry not found");
 
-            if (userEntry == null)
-                return NotFound("Listentry Not found");
+            //var userEntry = await _uow.UserEntries.Get(userId, listEntry.Id);
 
-            await _uow.UserEntries.Remove(userEntry);
-            await _uow.Complete();
+            //if (userEntry == null)
+            //    return NotFound("Listentry Not found");
 
-            return Ok();
+            //await _uow.UserEntries.Remove(userEntry);
+            //await _uow.Complete();
+
+            //return Ok();
         }
     }
 }

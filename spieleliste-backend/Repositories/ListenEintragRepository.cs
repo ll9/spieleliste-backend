@@ -21,9 +21,9 @@ namespace spieleliste_backend.Repositories
             return entry;
         }
 
-        public Task<ListEntry> Get(int id)
+        public async Task<ListEntry> Get(int id)
         {
-            return _context.ListEntries.SingleOrDefaultAsync(e => e.SpielId == id);
+            return await _context.ListEntries.SingleOrDefaultAsync(e => e.SpielId == id);
         }
 
         public Task Remove(ListEntry entry)

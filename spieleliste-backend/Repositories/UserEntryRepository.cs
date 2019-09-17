@@ -24,6 +24,12 @@ namespace spieleliste_backend.Repositories
             return entry;
         }
 
+        public async Task<UserEntry> Get(int userId, int listEntryId)
+        {
+            var entity = await _context.UserEntries.SingleOrDefaultAsync(e => e.UserId == userId && e.ListEntryId == listEntryId);
+            return entity;
+        }
+
         public async Task<UserEntry> Get(int id)
         {
             var entry = await _context.UserEntries.FindAsync(id);
