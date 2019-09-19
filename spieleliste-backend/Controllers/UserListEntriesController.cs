@@ -28,12 +28,12 @@ namespace spieleliste_backend.Controllers
             if (user == null)
                 return NotFound("User not found");
 
-            var listEntry = await _uow.ListenEintraege.Get(dto.SpielId);
+            var listEntry = await _uow.ListenEintraege.Get(dto.IgdbId);
 
             if (listEntry == null)
                 return NotFound("Listentry Not found");
 
-            var userEntry = new UserEntry(userId, listEntry.Id);
+            var userEntry = new UserEntry(userId, listEntry.IgdbId);
             await _uow.UserEntries.Add(userEntry);
             await _uow.Complete();
 
@@ -44,25 +44,15 @@ namespace spieleliste_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int userId, int id)
         {
-            throw new NotImplementedException("Fix below code");
+            var entry = await _uow.UserEntries.Get(userId, id);
 
-            //var user = await _uow.Users.Get(userId);
-            //var listEntry = await _uow.ListenEintraege.Get(id);
+            if (entry == null)
+                return NotFound("UserEntry not found");
 
-            //if (user == null)
-            //    return NotFound("User not found");
-            //if (listEntry == null)
-            //    return NotFound("ListEntry not found");
+            await _uow.UserEntries.Remove(entry);
+            await _uow.Complete();
 
-            //var userEntry = await _uow.UserEntries.Get(userId, listEntry.Id);
-
-            //if (userEntry == null)
-            //    return NotFound("Listentry Not found");
-
-            //await _uow.UserEntries.Remove(userEntry);
-            //await _uow.Complete();
-
-            //return Ok();
+            return NoContent();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace spieleliste_backend.Repositories
     public interface IUserEntryRepository
     {
         Task<UserEntry> Add(UserEntry entry);
-        Task<UserEntry> Get(int id, int spielId);
+        Task<UserEntry> Get(int userId, int igdbId);
         Task<UserEntry> Get(int id);
         Task<IEnumerable<UserEntry>> List();
         Task<IEnumerable<UserEntry>> ListByUser(int userId);

@@ -23,7 +23,7 @@ namespace spieleliste_backend.Repositories
 
         public async Task<ListEntry> Get(int id)
         {
-            return await _context.ListEntries.SingleOrDefaultAsync(e => e.SpielId == id);
+            return await _context.ListEntries.SingleOrDefaultAsync(e => e.IgdbId == id);
         }
 
         public Task Remove(ListEntry entry)

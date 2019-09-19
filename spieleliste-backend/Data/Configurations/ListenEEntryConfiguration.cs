@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Data.Configurations
 {
-    public class ListenEintragConfiguration : IEntityTypeConfiguration<ListEntry>
+    public class ListEntryConfiguration : IEntityTypeConfiguration<ListEntry>
     {
         public void Configure(EntityTypeBuilder<ListEntry> builder)
         {
-            builder.HasKey(e => e.Id);
-            builder.HasIndex(e => e.SpielId);
+            builder.HasKey(e => e.IgdbId);
         }
     }
 }

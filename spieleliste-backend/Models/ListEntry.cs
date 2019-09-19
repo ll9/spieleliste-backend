@@ -14,12 +14,11 @@ namespace spieleliste_backend.Models
 
         }
 
-        public ListEntry(int spielId)
+        public ListEntry(int igdbId)
         {
-            SpielId = spielId;
+            IgdbId = igdbId;
         }
 
-        public int Id { get; set; }
-        public int SpielId { get; set; }
+        public int IgdbId { get; set; }
     }
 }

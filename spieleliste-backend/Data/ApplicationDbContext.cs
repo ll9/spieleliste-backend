@@ -22,7 +22,7 @@ namespace spieleliste_backend.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ListenEintragConfiguration());
+            modelBuilder.ApplyConfiguration(new ListEntryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserEintragConfiguration());
             base.OnModelCreating(modelBuilder);

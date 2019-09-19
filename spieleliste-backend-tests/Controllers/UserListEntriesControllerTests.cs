@@ -38,9 +38,9 @@ namespace spielelistebackendtests.Controllers
         public async Task Create_ValidState_ReturnsCreatedAtAction()
         {
             User user = new User("_") { Id = 1 };
-            ListEntry listEntry = new ListEntry(100) { Id = 2 };
+            ListEntry listEntry = new ListEntry(100);
             userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
-            listEntryRepository.Setup(u => u.Get(listEntry.Id)).Returns(Task.FromResult(listEntry));
+            listEntryRepository.Setup(u => u.Get(listEntry.IgdbId)).Returns(Task.FromResult(listEntry));
 
             var res = await sut.Create(user.Id, listEntry);
 
@@ -50,9 +50,9 @@ namespace spielelistebackendtests.Controllers
         [Test]
         public async Task Create_UserNotFound_NotFoundResult()
         {
-            ListEntry listEntry = new ListEntry(100) { Id = 2 };
+            ListEntry listEntry = new ListEntry(100);
             userRepo.Setup(u => u.Get(1)).Returns(Task.FromResult<User>(null));
-            listEntryRepository.Setup(u => u.Get(listEntry.Id)).Returns(Task.FromResult(listEntry));
+            listEntryRepository.Setup(u => u.Get(listEntry.IgdbId)).Returns(Task.FromResult(listEntry));
 
             var res = await sut.Create(1, listEntry);
 
@@ -63,9 +63,9 @@ namespace spielelistebackendtests.Controllers
         public async Task Create_ListEntryNotFound_NotFoundResult()
         {
             User user = new User("_") { Id = 1 };
-            ListEntry listEntry = new ListEntry(100) { Id = 2 };
+            ListEntry listEntry = new ListEntry(100);
             userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
-            listEntryRepository.Setup(u => u.Get(2)).Returns(Task.FromResult<ListEntry>(null));
+            listEntryRepository.Setup(u => u.Get(100)).Returns(Task.FromResult<ListEntry>(null));
 
             var res = await sut.Create(1, listEntry);
 
@@ -75,31 +75,19 @@ namespace spielelistebackendtests.Controllers
         [Test]
         public async Task Delete_WhenCalled_ReturnsResult()
         {
-            User user = new User("_") { Id = 1 };
-            var userEntry = new UserEntry(user.Id, 2) { Id = 3 };
-            userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
-            userEntryRepo.Setup(u => u.Get(userEntry.Id)).Returns(Task.FromResult(userEntry));
-
-            var res = await sut.Remove(user.Id, userEntry.Id);
-
-            Assert.AreEqual(typeof(OkResult), res.GetType());
-        }
-
-        [Test]
-        public async Task Delete_UserNotFound_NotFoundResult()
-        {
-            userRepo.Setup(u => u.Get(It.IsAny<int>())).Returns(Task.FromResult<User>(null));
+            userRepo.Setup(u => u.Get(It.IsAny<int>())).Returns(Task.FromResult(new User("_")));
+            listEntryRepository.Setup(e => e.Get(It.IsAny<int>())).Returns(Task.FromResult(new ListEntry(It.IsAny<int>())));
+            userEntryRepo.Setup(u => u.Get(It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(new UserEntry(It.IsAny<int>(), It.IsAny<int>())));
 
             var res = await sut.Remove(It.IsAny<int>(), It.IsAny<int>());
 
-            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
+            Assert.AreEqual(typeof(NoContentResult), res.GetType());
         }
 
         [Test]
-        public async Task Delete_UserEntryNotFound_NotFoundResult()
+        public async Task Delete_NotFound_NotFoundResult()
         {
-            userRepo.Setup(u => u.Get(It.IsAny<int>())).Returns(Task.FromResult(new User("_")));
-            userEntryRepo.Setup(u => u.Get(It.IsAny<int>())).Returns(Task.FromResult<UserEntry>(null));
+            userEntryRepo.Setup(u => u.Get(It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult<UserEntry>(null));
 
             var res = await sut.Remove(It.IsAny<int>(), It.IsAny<int>());
 
