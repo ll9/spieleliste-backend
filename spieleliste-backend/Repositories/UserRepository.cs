@@ -32,6 +32,11 @@ namespace spieleliste_backend.Repositories
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<IEnumerable<User>> ListWithUserEntries()
+        {
+            return await _context.Users.Include(u => u.UserEntries).ToListAsync();
+        }
+
         public Task Remove(User entry)
         {
             _context.Users.Remove(entry);

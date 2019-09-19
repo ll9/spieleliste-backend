@@ -9,6 +9,7 @@ namespace spieleliste_backend.Repositories
         Task<User> Add(User entry);
         Task<User> Get(int id);
         Task<IEnumerable<User>> List();
+        Task<IEnumerable<User>> ListWithUserEntries();
         Task Remove(User entry);
         Task<User> Update(User entry);
     }

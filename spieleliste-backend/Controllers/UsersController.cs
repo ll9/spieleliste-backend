@@ -47,7 +47,7 @@ namespace spieleliste_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> List()
         {
-            var users = await _unitOfWork.Users.List();
+            var users = await _unitOfWork.Users.ListWithUserEntries();
 
             return Ok(users);
         }
