@@ -2,7 +2,7 @@
 
 namespace spieleliste_backend.Migrations
 {
-    public partial class FromScratch : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,13 +10,12 @@ namespace spieleliste_backend.Migrations
                 name: "ListEntries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SpielId = table.Column<int>(nullable: false)
+                    IgdbId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ListEntries", x => x.Id);
+                    table.PrimaryKey("PK_ListEntries", x => x.IgdbId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,7 +47,7 @@ namespace spieleliste_backend.Migrations
                         name: "FK_UserEntries_ListEntries_ListEntryId",
                         column: x => x.ListEntryId,
                         principalTable: "ListEntries",
-                        principalColumn: "Id",
+                        principalColumn: "IgdbId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserEntries_Users_UserId",
@@ -57,11 +56,6 @@ namespace spieleliste_backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ListEntries_SpielId",
-                table: "ListEntries",
-                column: "SpielId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserEntries_ListEntryId",

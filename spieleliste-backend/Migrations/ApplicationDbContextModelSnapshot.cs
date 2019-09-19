@@ -17,14 +17,10 @@ namespace spieleliste_backend.Migrations
 
             modelBuilder.Entity("spieleliste_backend.Models.ListEntry", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IgdbId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("SpielId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SpielId");
+                    b.HasKey("IgdbId");
 
                     b.ToTable("ListEntries");
                 });
