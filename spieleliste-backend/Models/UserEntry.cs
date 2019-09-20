@@ -26,5 +26,6 @@ namespace spieleliste_backend.Models
         public User User { get; set; }
         public int ListEntryId { get; set; }
         public ListEntry ListEntry { get; set; }
+        public int Index { get; set; }
     }
 }

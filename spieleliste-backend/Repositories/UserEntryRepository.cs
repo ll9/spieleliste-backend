@@ -42,6 +42,11 @@ namespace spieleliste_backend.Repositories
             return entries;
         }
 
+        public async Task<IEnumerable<UserEntry>> List(Predicate<UserEntry> predicate)
+        {
+            return await _context.UserEntries.Where(e => predicate(e)).ToListAsync();
+        }
+
         public async Task<IEnumerable<UserEntry>> ListByUser(int userId)
         {
             var entries = await _context.UserEntries.Where(e => e.UserId == userId).ToListAsync();

@@ -20,6 +20,38 @@ namespace spieleliste_backend.Controllers
             _uow = uow;
         }
 
+        [HttpPut("{gameId}/index")]
+        public async Task<IActionResult> Create(int userId, int gameId, [FromBody] int newIndex)
+        {
+            var userEntry = await _uow.UserEntries.Get(userId, gameId);
+
+            if (userEntry == null)
+                return NotFound("UserEntry not found");
+
+            if (newIndex > userEntry.Index)
+            {
+                // Where entryIndex > oldIndex && entryIndex <= newIndex => index -= 1
+                // index = newIndex
+                var items = await _uow.UserEntries.List(e => e.Index > userEntry.Index && userEntry.Index <= newIndex);
+                items.Select(e => e.Index--);
+                userEntry.Index = newIndex;
+
+            }
+            else if (newIndex < userEntry.Index)
+            {
+                // Where entryIndex < oldIndex && entryIndex >= newIndex => index += 1
+                // index = newIndex
+                var items = await _uow.UserEntries.List(e => e.Index < userEntry.Index && userEntry.Index >= newIndex);
+                items.Select(e => e.Index++);
+                userEntry.Index = newIndex;
+
+            }
+
+            await _uow.Complete();
+
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(int userId, [FromBody] ListEntry dto)
         {
