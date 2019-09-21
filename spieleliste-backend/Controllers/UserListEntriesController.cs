@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using spieleliste_backend.Data;
+using spieleliste_backend.Extensions;
 using spieleliste_backend.Models;
 using System;
 using System.Collections.Generic;
@@ -32,8 +33,8 @@ namespace spieleliste_backend.Controllers
             {
                 // Where entryIndex > oldIndex && entryIndex <= newIndex => index -= 1
                 // index = newIndex
-                var items = await _uow.UserEntries.List(e => e.Index > userEntry.Index && userEntry.Index <= newIndex);
-                items.Select(e => e.Index--);
+                var items = await _uow.UserEntries.List(e => e.Index > userEntry.Index && e.Index <= newIndex);
+                items.ForEach(e => e.Index--);
                 userEntry.Index = newIndex;
 
             }
@@ -41,8 +42,8 @@ namespace spieleliste_backend.Controllers
             {
                 // Where entryIndex < oldIndex && entryIndex >= newIndex => index += 1
                 // index = newIndex
-                var items = await _uow.UserEntries.List(e => e.Index < userEntry.Index && userEntry.Index >= newIndex);
-                items.Select(e => e.Index++);
+                var items = await _uow.UserEntries.List(e => e.Index < userEntry.Index && e.Index >= newIndex);
+                items.ForEach(e => ++e.Index);
                 userEntry.Index = newIndex;
 
             }
