@@ -14,10 +14,11 @@ namespace spieleliste_backend.Models
 
         }
 
-        public UserEntry(int userId, int listEntryId)
+        public UserEntry(int userId, int listEntryId, int index)
         {
             UserId = userId;
             ListEntryId = listEntryId;
+            Index = index;
         }
 
         public int Id { get; set; }

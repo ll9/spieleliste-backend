@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using spieleliste_backend.Data;
+using spieleliste_backend.Dtos;
 using spieleliste_backend.Extensions;
 using spieleliste_backend.Models;
 using System;
@@ -54,7 +55,7 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int userId, [FromBody] ListEntry dto)
+        public async Task<IActionResult> Create(int userId, [FromBody] UserEntryDto dto)
         {
             var user = await _uow.Users.Get(userId);
 
@@ -66,7 +67,10 @@ namespace spieleliste_backend.Controllers
             if (listEntry == null)
                 return NotFound("Listentry Not found");
 
-            var userEntry = new UserEntry(userId, listEntry.IgdbId);
+            var userEntry = new UserEntry(userId, dto.IgdbId, dto.Index);
+            var items = await _uow.UserEntries.List(e => e.Index >= userEntry.Index);
+            items.ForEach(e => ++e.Index);
+
             await _uow.UserEntries.Add(userEntry);
             await _uow.Complete();
 
@@ -81,6 +85,9 @@ namespace spieleliste_backend.Controllers
 
             if (entry == null)
                 return NotFound("UserEntry not found");
+
+            var items = await _uow.UserEntries.List(e => e.Index > entry.Index);
+            items.ForEach(e => --e.Index);
 
             await _uow.UserEntries.Remove(entry);
             await _uow.Complete();
