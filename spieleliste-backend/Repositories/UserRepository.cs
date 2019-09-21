@@ -2,6 +2,7 @@
 using spieleliste_backend.Data;
 using spieleliste_backend.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Repositories
@@ -34,7 +35,9 @@ namespace spieleliste_backend.Repositories
 
         public async Task<IEnumerable<User>> ListWithUserEntries()
         {
-            return await _context.Users.Include(u => u.UserEntries).ToListAsync();
+            var users = await _context.Users.Include(u => u.UserEntries).ToListAsync();
+            users.ForEach(u => u.UserEntries = u.UserEntries.OrderBy(_ => _.Index).ToList());
+            return users;
         }
 
         public Task Remove(User entry)
