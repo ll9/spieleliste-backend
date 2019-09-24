@@ -20,7 +20,9 @@ namespace spieleliste_backend.Repositories
 
         public async Task<IEnumerable<ArchiveEntry>> List()
         {
-            return await _context.ArchiveEntries.ToListAsync();
+            return await _context.ArchiveEntries
+                .OrderByDescending(e => e.Archived)
+                .ToListAsync();
         }
 
         public async Task<ArchiveEntry> Get(int id)
