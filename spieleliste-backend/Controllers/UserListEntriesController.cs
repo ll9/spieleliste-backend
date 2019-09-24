@@ -23,7 +23,7 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpPut("{gameId}/index")]
-        public async Task<IActionResult> Create(int userId, int gameId, [FromBody] int newIndex)
+        public async Task<IActionResult> UpdateIndex(int userId, int gameId, [FromBody] int newIndex)
         {
             var userEntry = await _uow.UserEntries.Get(userId, gameId);
 

@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using spieleliste_backend.Controllers;
 using spieleliste_backend.Data;
+using spieleliste_backend.Dtos;
 using spieleliste_backend.Models;
 using spieleliste_backend.Repositories;
 using System;
@@ -42,7 +43,7 @@ namespace spielelistebackendtests.Controllers
             userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
             listEntryRepository.Setup(u => u.Get(listEntry.IgdbId)).Returns(Task.FromResult(listEntry));
 
-            var res = await sut.Create(user.Id, listEntry);
+            var res = await sut.Create(user.Id, new UserEntryDto { IgdbId = listEntry.IgdbId });
 
             Assert.AreEqual(typeof(OkResult), res.GetType());
         }
@@ -54,7 +55,7 @@ namespace spielelistebackendtests.Controllers
             userRepo.Setup(u => u.Get(1)).Returns(Task.FromResult<User>(null));
             listEntryRepository.Setup(u => u.Get(listEntry.IgdbId)).Returns(Task.FromResult(listEntry));
 
-            var res = await sut.Create(1, listEntry);
+            var res = await sut.Create(1, new UserEntryDto { IgdbId = listEntry.IgdbId });
 
             Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
@@ -67,7 +68,7 @@ namespace spielelistebackendtests.Controllers
             userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
             listEntryRepository.Setup(u => u.Get(100)).Returns(Task.FromResult<ListEntry>(null));
 
-            var res = await sut.Create(1, listEntry);
+            var res = await sut.Create(1, new UserEntryDto { IgdbId = listEntry.IgdbId });
 
             Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
         }
@@ -77,7 +78,7 @@ namespace spielelistebackendtests.Controllers
         {
             userRepo.Setup(u => u.Get(It.IsAny<int>())).Returns(Task.FromResult(new User("_")));
             listEntryRepository.Setup(e => e.Get(It.IsAny<int>())).Returns(Task.FromResult(new ListEntry(It.IsAny<int>())));
-            userEntryRepo.Setup(u => u.Get(It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(new UserEntry(It.IsAny<int>(), It.IsAny<int>())));
+            userEntryRepo.Setup(u => u.Get(It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(new UserEntry(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())));
 
             var res = await sut.Remove(It.IsAny<int>(), It.IsAny<int>());
 
