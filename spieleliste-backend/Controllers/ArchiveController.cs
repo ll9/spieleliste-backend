@@ -28,6 +28,18 @@ namespace spieleliste_backend.Controllers
             return Ok(entities);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<ArchiveEntry>> Create([FromBody] int igdbId)
+        {
+            var entity = new ArchiveEntry(igdbId);
+            entity.SetArchiveDate();
+
+            await _unitOfWork.ArchiveEntries.Create(entity);
+            await _unitOfWork.Complete();
+
+            return Ok(entity);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -33,5 +33,11 @@ namespace spieleliste_backend.Repositories
             _context.ArchiveEntries.Remove(archiveEntry);
             return Task.CompletedTask;
         }
+
+        public Task<ArchiveEntry> Create(ArchiveEntry archiveEntry)
+        {
+            _context.ArchiveEntries.Add(archiveEntry);
+            return Task.FromResult(archiveEntry);
+        }
     }
 }
