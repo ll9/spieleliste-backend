@@ -18,11 +18,13 @@ namespace spieleliste_backend.Data
             ListenEintraege = new ListenEintragRepository(_context);
             Users = new UserRepository(_context);
             UserEntries = new UserEntryRepository(_context);
+            ArchiveEntries = new ArchiveRepository(_context);
         }
 
         public IListenEintragRepository ListenEintraege { get; set; }
         public IUserRepository Users { get; set; }
         public IUserEntryRepository UserEntries { get; set; }
+        public IArchiveRepository ArchiveEntries { get; set; }
 
         public Task Complete()
         {

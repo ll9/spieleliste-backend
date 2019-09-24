@@ -8,6 +8,7 @@ namespace spieleliste_backend.Data
         IListenEintragRepository ListenEintraege { get; set; }
         IUserEntryRepository UserEntries { get; set; }
         IUserRepository Users { get; set; }
+        IArchiveRepository ArchiveEntries { get; set; }
 
         Task Complete();
     }
