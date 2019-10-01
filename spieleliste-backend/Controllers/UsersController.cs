@@ -20,6 +20,14 @@ namespace spieleliste_backend.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> List()
+        {
+            var users = await _unitOfWork.Users.ListWithUserEntries();
+
+            return Ok(users);
+        }
+
         [HttpPost]
         public async Task<ActionResult<User>> Create(User user)
         {
@@ -42,14 +50,6 @@ namespace spieleliste_backend.Controllers
             }
 
             return CreatedAtAction(nameof(Get), new { Id = user.Id }, user);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> List()
-        {
-            var users = await _unitOfWork.Users.ListWithUserEntries();
-
-            return Ok(users);
         }
 
         [HttpGet("{id}")]

@@ -19,6 +19,14 @@ namespace spieleliste_backend.Controllers
             _uow = uow;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ListEntry>>> GetList()
+        {
+            var entries = await _uow.ListenEintraege.List();
+
+            return Ok(entries);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddToList([FromBody] ListEntry entry)
         {
@@ -41,14 +49,6 @@ namespace spieleliste_backend.Controllers
             }
 
             return Ok(entry);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ListEntry>>> GetList()
-        {
-            var entries = await _uow.ListenEintraege.List();
-
-            return Ok(entries);
         }
 
         [HttpDelete("{id}")]
