@@ -3,17 +3,14 @@ using spieleliste_backend.Data;
 using spieleliste_backend.Dtos;
 using spieleliste_backend.Extensions;
 using spieleliste_backend.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Controllers
 {
     [Route("api/users/{userId}/listentries")]
     [ApiController]
-    public class UserListEntriesController: ControllerBase
+    public class UserListEntriesController : ControllerBase
     {
         private readonly IUnitOfWork _uow;
 
@@ -30,11 +27,6 @@ namespace spieleliste_backend.Controllers
             if (user == null)
                 return NotFound("User not found");
 
-            var listEntry = await _uow.ListenEintraege.Get(dto.IgdbId);
-
-            if (listEntry == null)
-                return NotFound("Listentry Not found");
-
             var userEntry = new UserEntry(userId, dto.IgdbId, dto.Index);
             var items = await _uow.UserEntries.List(e => e.Index >= userEntry.Index);
             items.ForEach(e => ++e.Index);
@@ -44,7 +36,6 @@ namespace spieleliste_backend.Controllers
 
             return Ok();
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int userId, int id)
@@ -78,7 +69,6 @@ namespace spieleliste_backend.Controllers
                 var items = await _uow.UserEntries.List(e => e.Index > userEntry.Index && e.Index <= newIndex);
                 items.ForEach(e => e.Index--);
                 userEntry.Index = newIndex;
-
             }
             else if (newIndex < userEntry.Index)
             {
@@ -87,7 +77,6 @@ namespace spieleliste_backend.Controllers
                 var items = await _uow.UserEntries.List(e => e.Index < userEntry.Index && e.Index >= newIndex);
                 items.ForEach(e => ++e.Index);
                 userEntry.Index = newIndex;
-
             }
 
             await _uow.Complete();
