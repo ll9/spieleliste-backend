@@ -6,10 +6,6 @@ using spieleliste_backend.Data;
 using spieleliste_backend.Dtos;
 using spieleliste_backend.Models;
 using spieleliste_backend.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace spielelistebackendtests.Controllers
@@ -54,19 +50,6 @@ namespace spielelistebackendtests.Controllers
             ListEntry listEntry = new ListEntry(100);
             userRepo.Setup(u => u.Get(1)).Returns(Task.FromResult<User>(null));
             listEntryRepository.Setup(u => u.Get(listEntry.IgdbId)).Returns(Task.FromResult(listEntry));
-
-            var res = await sut.Create(1, new UserEntryDto { IgdbId = listEntry.IgdbId });
-
-            Assert.AreEqual(typeof(NotFoundObjectResult), res.GetType());
-        }
-
-        [Test]
-        public async Task Create_ListEntryNotFound_NotFoundResult()
-        {
-            User user = new User("_") { Id = 1 };
-            ListEntry listEntry = new ListEntry(100);
-            userRepo.Setup(u => u.Get(user.Id)).Returns(Task.FromResult(user));
-            listEntryRepository.Setup(u => u.Get(100)).Returns(Task.FromResult<ListEntry>(null));
 
             var res = await sut.Create(1, new UserEntryDto { IgdbId = listEntry.IgdbId });
 
