@@ -57,9 +57,7 @@ namespace spieleliste_backend.Controllers
             var entry = await _uow.ListenEintraege.Get(id);
 
             if (entry == null)
-            {
                 return NotFound();
-            }
 
             await _uow.ListenEintraege.Remove(entry);
             await _uow.Complete();
