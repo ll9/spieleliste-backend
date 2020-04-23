@@ -19,7 +19,7 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List([FromHeader] ResourceParameters resourceParameters)
+        public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List([FromQuery] ResourceParameters resourceParameters)
         {
             var entities = await _unitOfWork.ArchiveEntries.List(resourceParameters);
 

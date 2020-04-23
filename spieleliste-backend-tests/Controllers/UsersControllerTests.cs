@@ -5,7 +5,6 @@ using spieleliste_backend.Controllers;
 using spieleliste_backend.Data;
 using spieleliste_backend.Models;
 using spieleliste_backend.Repositories;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +20,7 @@ namespace spielelistebackendtests.Controllers
         {
             repo = new Mock<IUserRepository>();
             var uow = new Mock<IUnitOfWork>();
-            uow.Setup(uow => uow.Users).Returns(repo.Object);
+            uow.Setup(u => u.Users).Returns(repo.Object);
             sut = new UsersController(uow.Object);
         }
 

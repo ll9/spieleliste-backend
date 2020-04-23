@@ -5,10 +5,6 @@ using spieleliste_backend.Controllers;
 using spieleliste_backend.Data;
 using spieleliste_backend.Models;
 using spieleliste_backend.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace spielelistebackendtests.Controllers
@@ -24,7 +20,7 @@ namespace spielelistebackendtests.Controllers
             var uow = new Mock<IUnitOfWork>();
             repo = new Mock<IListenEintragRepository>();
 
-            uow.Setup(uow => uow.ListenEintraege).Returns(repo.Object);
+            uow.Setup(u => u.ListenEintraege).Returns(repo.Object);
             sut = new ListEntriesController(uow.Object);
         }
 
@@ -50,7 +46,6 @@ namespace spielelistebackendtests.Controllers
         {
             repo.Setup(r => r.Get(1)).Returns(Task.FromResult(new ListEntry(1)));
             repo.Setup(r => r.Remove(new ListEntry(1))).Returns(Task.CompletedTask);
-
 
             var res = await sut.RemoveFromList(1);
 

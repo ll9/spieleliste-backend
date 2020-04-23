@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using spieleliste_backend.Data;
 using spieleliste_backend.Models;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Controllers
@@ -36,16 +35,9 @@ namespace spieleliste_backend.Controllers
             {
                 await _uow.Complete();
             }
-            catch (SqlException exception)
+            catch (Exception exception)
             {
-                if (exception.Number == 2601 || exception.Number == 2627)
-                {
-                    return StatusCode((int)HttpStatusCode.Conflict, "Item already on list");
-                }
-                else
-                {
-                    return BadRequest(exception.Message);
-                }
+                return BadRequest(exception.Message);
             }
 
             return Ok(entry);

@@ -19,7 +19,7 @@
             get { return _pageSize; }
             set
             {
-                _pageSize = value > 1 && value < MaxPageSize ? value : MaxPageSize;
+                _pageSize = value > 0 && value <= MaxPageSize ? value : MaxPageSize;
             }
         }
 
