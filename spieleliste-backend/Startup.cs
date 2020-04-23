@@ -53,7 +53,8 @@ namespace spieleliste_backend
                 options
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Total-Count");
             });
 
             app.Ext_AddSwagger();

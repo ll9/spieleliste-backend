@@ -8,10 +8,13 @@ namespace spieleliste_backend.Helper
 {
     public class PagedList<T> : List<T>
     {
-        private PagedList(List<T> items)
+        private PagedList(List<T> items, int totalCount)
         {
             AddRange(items);
+            TotalCount = totalCount;
         }
+
+        public int TotalCount { get; }
 
         public static async Task<PagedList<T>> Create(IQueryable<T> query, ResourceParameters resource)
         {
@@ -20,7 +23,7 @@ namespace spieleliste_backend.Helper
                 .Take(resource.PageSize)
                 .ToListAsync();
 
-            return new PagedList<T>(items);
+            return new PagedList<T>(items, query.Count());
         }
     }
 }

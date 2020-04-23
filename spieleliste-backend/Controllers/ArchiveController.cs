@@ -22,6 +22,7 @@ namespace spieleliste_backend.Controllers
         public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List([FromQuery] ResourceParameters resourceParameters)
         {
             var entities = await _unitOfWork.ArchiveEntries.List(resourceParameters);
+            Response.Headers.Add("X-Total-Count", entities.TotalCount.ToString());
 
             return Ok(entities);
         }
