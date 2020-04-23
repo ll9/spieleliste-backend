@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using spieleliste_backend.Data;
+using spieleliste_backend.Dtos;
 using spieleliste_backend.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Controllers
 {
     [Route("api/archive")]
     [ApiController]
-    public class ArchiveController: ControllerBase
+    public class ArchiveController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -21,9 +19,9 @@ namespace spieleliste_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List()
+        public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List([FromHeader] ResourceParameters resourceParameters)
         {
-            var entities = await _unitOfWork.ArchiveEntries.List();
+            var entities = await _unitOfWork.ArchiveEntries.List(resourceParameters);
 
             return Ok(entities);
         }
