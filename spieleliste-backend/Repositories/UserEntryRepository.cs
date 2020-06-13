@@ -4,7 +4,7 @@ using spieleliste_backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Repositories
@@ -42,9 +42,9 @@ namespace spieleliste_backend.Repositories
             return entries;
         }
 
-        public async Task<IEnumerable<UserEntry>> List(Predicate<UserEntry> predicate)
+        public async Task<IEnumerable<UserEntry>> List(Expression<Func<UserEntry, bool>> predicate)
         {
-            return await _context.UserEntries.Where(e => predicate(e)).ToListAsync();
+            return await _context.UserEntries.Where(predicate).ToListAsync();
         }
 
         public async Task<IEnumerable<UserEntry>> ListByUser(int userId)
