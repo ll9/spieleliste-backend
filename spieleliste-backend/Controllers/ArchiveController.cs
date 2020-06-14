@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using spieleliste_backend.Data;
 using spieleliste_backend.Dtos;
 using spieleliste_backend.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace spieleliste_backend.Controllers
@@ -12,10 +14,20 @@ namespace spieleliste_backend.Controllers
     public class ArchiveController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ApplicationDbContext _context;
 
-        public ArchiveController(IUnitOfWork unitOfWork)
+        public ArchiveController(IUnitOfWork unitOfWork, ApplicationDbContext context)
         {
             _unitOfWork = unitOfWork;
+            _context = context;
+        }
+
+        [HttpGet("year/{year}")]
+        public async Task<ActionResult<IEnumerable<ArchiveEntry>>> List(int year = 2019)
+        {
+            var entities = await _context.ArchiveEntries.Where(e => e.Archived.Year == year).ToListAsync();
+
+            return Ok(entities);
         }
 
         [HttpGet]
