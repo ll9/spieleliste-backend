@@ -14,7 +14,7 @@ namespace spieleliste_backend.Services
 {
     public interface IIGDBTokenService
     {
-        Task<Result<string>> GetNewAccessToken();
+        Task<Result<IgdbResponse>> GetNewAccessToken();
     }
 
     public class IGDBTokenService : IIGDBTokenService
@@ -29,18 +29,18 @@ namespace spieleliste_backend.Services
             _settings = igdbSettingsOptions.Value;
         }
 
-        public async Task<Result<string>> GetNewAccessToken()
+        public async Task<Result<IgdbResponse>> GetNewAccessToken()
         {
             var response = await _client.PostAsync(GetUrl(), null);
             var body = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return Result.Failure<string>(body);
+                return Result.Failure<IgdbResponse>(body);
             }
 
             var igdbResponse = DeserializeRespone(body);
-            return Result.Success(igdbResponse.AccessToken);
+            return Result.Success(igdbResponse);
         }
 
         private IgdbResponse DeserializeRespone(string body)
