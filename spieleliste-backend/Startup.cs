@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using spieleliste_backend.Data;
 using spieleliste_backend.Extensions.Startup;
+using spieleliste_backend.Helper;
 
 namespace spieleliste_backend
 {
@@ -25,6 +26,8 @@ namespace spieleliste_backend
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.Ext_AddSwagger();
+
+            services.Configure<IgdbSettings>(Configuration.GetSection(nameof(IgdbSettings)));
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
