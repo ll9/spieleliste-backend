@@ -12,7 +12,12 @@ using System.Threading.Tasks;
 
 namespace spieleliste_backend.Services
 {
-    public class IGDBTokenService
+    public interface IIGDBTokenService
+    {
+        Task<Result<string>> GetNewAccessToken();
+    }
+
+    public class IGDBTokenService : IIGDBTokenService
     {
         private const string _baseUrl = "https://id.twitch.tv/oauth2/token";
         private readonly HttpClient _client;

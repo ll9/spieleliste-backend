@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using spieleliste_backend.Data;
 using spieleliste_backend.Extensions.Startup;
 using spieleliste_backend.Helper;
+using spieleliste_backend.Services;
+using System.Net.Http;
 
 namespace spieleliste_backend
 {
@@ -24,6 +26,8 @@ namespace spieleliste_backend
         {
             services.AddDbContext<ApplicationDbContext>(conf => conf.UseSqlite("Data Source = db.sqlite"));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<HttpClient, HttpClient>();
+            services.AddScoped<IIGDBTokenService, IGDBTokenService>();
 
             services.Ext_AddSwagger();
 
