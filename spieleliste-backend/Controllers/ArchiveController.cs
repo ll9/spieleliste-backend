@@ -51,6 +51,22 @@ namespace spieleliste_backend.Controllers
             return Ok(entity);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Delete(int id, ArchiveInDto dto)
+        {
+            var entity = await _unitOfWork.ArchiveEntries.Get(id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            entity.Archived = dto.Archived;
+            await _unitOfWork.Complete();
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
